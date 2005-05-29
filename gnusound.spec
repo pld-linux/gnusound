@@ -4,27 +4,27 @@ Version:	0.7.1
 Release:	1
 License:	GPL
 Group:		X11/Applications/Sound
-URL:		http://www.gnu.org/software/gnusound/
 Source0:	ftp://ftp.gnu.org/gnu/gnusound/%{name}-%{version}.tar.bz2
 # Source0-md5:	43eef7373be32b5ec523f82dac5ba7bb
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-BuildRequires:	alsa-lib-devel >= 1.0.2
-BuildRequires:	jack-audio-connection-kit-devel >= 0.94
-BuildRequires:	libogg-devel
-BuildRequires:	libvorbis-devel
-BuildRequires:	flac-devel
-BuildRequires:	libsndfile-devel >= 1.0.4
-BuildRequires:	lame
-BuildRequires:	gtk+2-devel
-BuildRequires:	libglade2-devel
-BuildRequires:	pkgconfig
-BuildRequires:	ladspa
-BuildRequires:	audiofile >= 0.2.3
-BuildRequires:	zlib-devel
-BuildRequires:	libsamplerate-devel
-BuildRequires:	libxml2-devel
+URL:		http://www.gnu.org/software/gnusound/
 BuildRequires:	ORBit2-devel
+BuildRequires:	alsa-lib-devel >= 1.0.2
+BuildRequires:	audiofile >= 0.2.3
+BuildRequires:	flac-devel
+BuildRequires:	gtk+2-devel
+BuildRequires:	jack-audio-connection-kit-devel >= 0.94
+BuildRequires:	ladspa
+BuildRequires:	lame
+BuildRequires:	libglade2-devel
 BuildRequires:	libgnomeui-devel
+BuildRequires:	libogg-devel
+BuildRequires:	libsamplerate-devel
+BuildRequires:	libsndfile-devel >= 1.0.4
+BuildRequires:	libvorbis-devel
+BuildRequires:	libxml2-devel
+BuildRequires:	pkgconfig
+BuildRequires:	zlib-devel
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 GNUsound is a multitrack sound editor for GNOME. It reads and writes
@@ -51,11 +51,10 @@ acronyms, so you'll just have to try it and see for yourself.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__make} \
+%{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	owner_user=`whoami` \
-	owner_group=users \
-	install
+	owner_group=users
 
 # man page
 install -d $RPM_BUILD_ROOT%{_mandir}/man1
