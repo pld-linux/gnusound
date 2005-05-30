@@ -1,4 +1,5 @@
-Summary:	GNUsound is a multitrack sound editor for GNOME
+Summary:	GNUsound - a multitrack sound editor for GNOME
+Summary(pl):	GNUsound - wielo¶cie¿kowy edytor d¼wiêku dla GNOME
 Name:		gnusound
 Version:	0.7.1
 Release:	1
@@ -39,6 +40,21 @@ compressors and delay effects.
 The most important feature of GNUsound, however, is to stay out of
 your way. This feature is not so easily expressed by a laundry list of
 acronyms, so you'll just have to try it and see for yourself.
+
+%description -l pl
+GNUsound to wielo¶cie¿kowy edytor d¼wiêku dla GNOME. Czyta i zapisuje
+wiele formatów d¼wiêkowych, takich jak WAV, MP3 i FLAC poprzez
+modularny system sterowników formatów plików; mo¿e tak¿e wydobywaæ
+d¼wiêk z formatów video, takich jak MPG, WMV czy AVI poprzez sterownik
+formatu plików FFmpeg. Mo¿e tak¿e u¿ywaæ sterowników OSS, ALSA albo
+JACK do nagrywania i odtwarzania; wspó³pracuje z systemem wtyczek
+LADSPA w celu dostarczenia szerokiej gamy wtyczek do przetwarzania
+d¼wiêku wysokiej jako¶ci, takich jak filtry, kompresory i efekty
+opó¼niaj±ce.
+
+Najwa¿niejsz± cech± edytora GNUsound jest jednak to, ¿e nie stoi nam
+na drodze. Ta cecha nie mo¿e byæ ³atwo wyra¿ona list± akronimów, wiêc
+trzeba to sprawdziæ samemu.
 
 %prep
 %setup -q
