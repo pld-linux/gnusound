@@ -7,10 +7,13 @@ License:	GPL
 Group:		X11/Applications/Sound
 Source0:	ftp://ftp.gnu.org/gnu/gnusound/%{name}-%{version}.tar.bz2
 # Source0-md5:	43eef7373be32b5ec523f82dac5ba7bb
+Patch0:		%{name}-Makefiles.patch
 URL:		http://www.gnu.org/software/gnusound/
+BuildRequires:	autoconf
+BuildRequires:	automake	
 BuildRequires:	alsa-lib-devel >= 1.0.2
 BuildRequires:	audiofile-devel >= 0.2.3
-BuildRequires:	ffmpeg-devel
+BuildRequires:	ffmpeg-devel >= 0.4.9
 BuildRequires:	flac-devel
 BuildRequires:	jack-audio-connection-kit-devel >= 0.94
 BuildRequires:	lame-libs-devel
@@ -54,20 +57,23 @@ trzeba to sprawdziæ samemu.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
+cp -f /usr/share/automake/config.sub config 
+%{__aclocal} -I config
+%{__autoconf} -I config
 %configure \
 	--with-libsamplerate \
 	--with-gnome2
-%{__make}
+
+%{__make} CC="%{__cc}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	desktopdir=%{_desktopdir} \
-	owner_user=`id -nu` \
-	owner_group=`id -ng`
+	desktopdir=%{_desktopdir} 
 
 # man page
 install -d $RPM_BUILD_ROOT%{_mandir}/man1
