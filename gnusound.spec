@@ -8,23 +8,19 @@ Group:		X11/Applications/Sound
 Source0:	ftp://ftp.gnu.org/gnu/gnusound/%{name}-%{version}.tar.bz2
 # Source0-md5:	43eef7373be32b5ec523f82dac5ba7bb
 URL:		http://www.gnu.org/software/gnusound/
-BuildRequires:	ORBit2-devel
 BuildRequires:	alsa-lib-devel >= 1.0.2
-BuildRequires:	audiofile >= 0.2.3
+BuildRequires:	audiofile-devel >= 0.2.3
+BuildRequires:	ffmpeg-devel
 BuildRequires:	flac-devel
-BuildRequires:	gtk+2-devel
 BuildRequires:	jack-audio-connection-kit-devel >= 0.94
-BuildRequires:	ladspa
-BuildRequires:	lame
-BuildRequires:	libglade2-devel
-BuildRequires:	libgnomeui-devel
+BuildRequires:	lame-libs-devel
+BuildRequires:	libglade2-devel >= 2.0
+BuildRequires:	libgnomeui-devel >= 2.0.0
 BuildRequires:	libogg-devel
 BuildRequires:	libsamplerate-devel
 BuildRequires:	libsndfile-devel >= 1.0.4
 BuildRequires:	libvorbis-devel
-BuildRequires:	libxml2-devel
 BuildRequires:	pkgconfig
-BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -69,18 +65,20 @@ trzeba to sprawdziæ samemu.
 rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	owner_user=`whoami` \
-	owner_group=users
+	desktopdir=%{_desktopdir} \
+	owner_user=`id -nu` \
+	owner_group=`id -ng`
 
 # man page
 install -d $RPM_BUILD_ROOT%{_mandir}/man1
 install doc/C/%{name}.1 $RPM_BUILD_ROOT%{_mandir}/man1
 
-%files
+%find_lang %{name} --with-gnome
+
+%files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc CHANGES INSTALL LICENSE NOTES README TODO
+%doc CHANGES NOTES README TODO
 %attr(755,root,root) %{_bindir}/%{name}
 %{_libdir}/%{name}
-%{_datadir}/gnome/help
-%{_applnkdir}/*
+%{_desktopdir}/*.desktop
 %{_mandir}/man1/%{name}*
