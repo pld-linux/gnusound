@@ -7,6 +7,7 @@ License:	GPL
 Group:		X11/Applications/Sound
 Source0:	ftp://ftp.gnu.org/gnu/gnusound/%{name}-%{version}.tar.bz2
 # Source0-md5:	43eef7373be32b5ec523f82dac5ba7bb
+Source1:	%{name}.desktop
 Patch0:		%{name}-Makefiles.patch
 URL:		http://www.gnu.org/software/gnusound/
 BuildRequires:	autoconf
@@ -75,9 +76,9 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT \
 	desktopdir=%{_desktopdir} 
 
-# man page
-install -d $RPM_BUILD_ROOT%{_mandir}/man1
-install doc/C/%{name}.1 $RPM_BUILD_ROOT%{_mandir}/man1
+install -D doc/C/gnusound.1 $RPM_BUILD_ROOT%{_mandir}/man1/gnusound.1
+install -D gui/logo.xpm $RPM_BUILD_ROOT%{_pixmapsdir}/gnusound.xpm
+install -D %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}/gnusound.desktop
 
 %find_lang %{name} --with-gnome
 
@@ -86,5 +87,6 @@ install doc/C/%{name}.1 $RPM_BUILD_ROOT%{_mandir}/man1
 %doc CHANGES NOTES README TODO
 %attr(755,root,root) %{_bindir}/%{name}
 %{_libdir}/%{name}
-%{_desktopdir}/*.desktop
+%{_desktopdir}/%{name}.desktop
+%{_pixmapsdir}/gnusound.xpm
 %{_mandir}/man1/%{name}*
