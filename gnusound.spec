@@ -10,10 +10,10 @@ Source0:	ftp://ftp.gnu.org/gnu/gnusound/%{name}-%{version}.tar.bz2
 Source1:	%{name}.desktop
 Patch0:		%{name}-Makefiles.patch
 URL:		http://www.gnu.org/software/gnusound/
-BuildRequires:	autoconf
-BuildRequires:	automake	
 BuildRequires:	alsa-lib-devel >= 1.0.2
 BuildRequires:	audiofile-devel >= 0.2.3
+BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	ffmpeg-devel >= 0.4.9
 BuildRequires:	flac-devel
 BuildRequires:	jack-audio-connection-kit-devel >= 0.94
@@ -61,7 +61,7 @@ trzeba to sprawdziæ samemu.
 %patch0 -p1
 
 %build
-cp -f /usr/share/automake/config.sub config 
+cp -f /usr/share/automake/config.sub config
 %{__aclocal} -I config
 %{__autoconf} -I config
 %configure \
@@ -74,13 +74,16 @@ cp -f /usr/share/automake/config.sub config
 rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	desktopdir=%{_desktopdir} 
+	desktopdir=%{_desktopdir}
 
 install -D doc/C/gnusound.1 $RPM_BUILD_ROOT%{_mandir}/man1/gnusound.1
 install -D gui/logo.xpm $RPM_BUILD_ROOT%{_pixmapsdir}/gnusound.xpm
 install -D %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}/gnusound.desktop
 
 %find_lang %{name} --with-gnome
+
+%clean
+rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
