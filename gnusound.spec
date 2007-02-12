@@ -1,5 +1,5 @@
 Summary:	GNUsound - a multitrack sound editor for GNOME
-Summary(pl):	GNUsound - wielo¶cie¿kowy edytor d¼wiêku dla GNOME
+Summary(pl.UTF-8):   GNUsound - wieloÅ›cieÅ¼kowy edytor dÅºwiÄ™ku dla GNOME
 Name:		gnusound
 Version:	0.7.1
 Release:	1
@@ -41,20 +41,20 @@ The most important feature of GNUsound, however, is to stay out of
 your way. This feature is not so easily expressed by a laundry list of
 acronyms, so you'll just have to try it and see for yourself.
 
-%description -l pl
-GNUsound to wielo¶cie¿kowy edytor d¼wiêku dla GNOME. Czyta i zapisuje
-wiele formatów d¼wiêkowych, takich jak WAV, MP3 i FLAC poprzez
-modularny system sterowników formatów plików; mo¿e tak¿e wydobywaæ
-d¼wiêk z formatów video, takich jak MPG, WMV czy AVI poprzez sterownik
-formatu plików FFmpeg. Mo¿e tak¿e u¿ywaæ sterowników OSS, ALSA albo
-JACK do nagrywania i odtwarzania; wspó³pracuje z systemem wtyczek
+%description -l pl.UTF-8
+GNUsound to wieloÅ›cieÅ¼kowy edytor dÅºwiÄ™ku dla GNOME. Czyta i zapisuje
+wiele formatÃ³w dÅºwiÄ™kowych, takich jak WAV, MP3 i FLAC poprzez
+modularny system sterownikÃ³w formatÃ³w plikÃ³w; moÅ¼e takÅ¼e wydobywaÄ‡
+dÅºwiÄ™k z formatÃ³w video, takich jak MPG, WMV czy AVI poprzez sterownik
+formatu plikÃ³w FFmpeg. MoÅ¼e takÅ¼e uÅ¼ywaÄ‡ sterownikÃ³w OSS, ALSA albo
+JACK do nagrywania i odtwarzania; wspÃ³Å‚pracuje z systemem wtyczek
 LADSPA w celu dostarczenia szerokiej gamy wtyczek do przetwarzania
-d¼wiêku wysokiej jako¶ci, takich jak filtry, kompresory i efekty
-opó¼niaj±ce.
+dÅºwiÄ™ku wysokiej jakoÅ›ci, takich jak filtry, kompresory i efekty
+opÃ³ÅºniajÄ…ce.
 
-Najwa¿niejsz± cech± edytora GNUsound jest jednak to, ¿e nie stoi nam
-na drodze. Ta cecha nie mo¿e byæ ³atwo wyra¿ona list± akronimów, wiêc
-trzeba to sprawdziæ samemu.
+NajwaÅ¼niejszÄ… cechÄ… edytora GNUsound jest jednak to, Å¼e nie stoi nam
+na drodze. Ta cecha nie moÅ¼e byÄ‡ Å‚atwo wyraÅ¼ona listÄ… akronimÃ³w, wiÄ™c
+trzeba to sprawdziÄ‡ samemu.
 
 %prep
 %setup -q
