@@ -1,5 +1,5 @@
 Summary:	GNUsound - a multitrack sound editor for GNOME
-Summary(pl.UTF-8):   GNUsound - wielościeżkowy edytor dźwięku dla GNOME
+Summary(pl.UTF-8):	GNUsound - wielościeżkowy edytor dźwięku dla GNOME
 Name:		gnusound
 Version:	0.7.1
 Release:	1
