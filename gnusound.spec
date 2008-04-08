@@ -5,7 +5,7 @@ Version:	0.7.1
 Release:	1
 License:	GPL
 Group:		X11/Applications/Sound
-Source0:	ftp://ftp.gnu.org/gnu/gnusound/%{name}-%{version}.tar.bz2
+Source0:	http://ftp.gnu.org/gnu/gnusound/%{name}-%{version}.tar.bz2
 # Source0-md5:	43eef7373be32b5ec523f82dac5ba7bb
 Source1:	%{name}.desktop
 Patch0:		%{name}-Makefiles.patch
