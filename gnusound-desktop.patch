@@ -1,0 +1,10 @@
+--- gnusound-0.7.5/gnusound.desktop.in.orig	2005-07-04 20:31:32.000000000 +0200
++++ gnusound-0.7.5/gnusound.desktop.in	2023-09-23 20:12:51.130598493 +0200
+@@ -6,5 +6,5 @@ Comment=Sound editor
+ Exec=gnusound %F
+ Icon=@GNUSOUND_LIBDIR@/gui/logo.xpm
+ Terminal=0
+-MimeType=audio/wav;audio/x-wav;audio/mpeg;audio/x-mpeg;audio/mpeg3;audio/x-mpeg-3;audio/x-mp3;video/mpeg;video/x-mpeg;audio/aiff;audio/x-aiff;audio/basic;video/avi;video/msvideo;video/x-msvideo;audio/x-au;audio/x-realaudio;audio/x-pn-realaudio;audio/voc;audio/x-voc;audio/x-flac;application/x-flac;application/ogg;audio/x-ulaw;audio/x-voc;video/quicktime;video/x-ms-asf;video/x-ms-wmv
+-Categories=Application;AudioVideo;
++MimeType=audio/wav;audio/x-wav;audio/mpeg;audio/x-mpeg;audio/mpeg3;audio/x-mpeg-3;audio/x-mp3;video/mpeg;video/x-mpeg;audio/aiff;audio/x-aiff;audio/basic;video/avi;video/msvideo;video/x-msvideo;audio/x-au;audio/x-realaudio;audio/x-pn-realaudio;audio/voc;audio/x-voc;audio/x-flac;application/x-flac;application/ogg;audio/x-ulaw;audio/x-voc;video/quicktime;video/x-ms-asf;video/x-ms-wmv;
++Categories=AudioVideo;

@@ -1,19 +1,25 @@
-diff -Nurb gnusound-0.7.1.bef/doc/Makefile gnusound-0.7.1.new/doc/Makefile
---- gnusound-0.7.1.bef/doc/Makefile	2005-05-27 20:32:20.000000000 +0200
-+++ gnusound-0.7.1.new/doc/Makefile	2005-05-31 01:39:33.000000000 +0200
-@@ -22,8 +22,7 @@
- docname=gnusound
- xslstylesheet=/usr/share/sgml/docbook/xsl-stylesheets/xhtml/chunk.xsl
+--- gnusound-0.7.5/doc/Makefile.in.orig	2023-09-23 18:52:44.919969304 +0200
++++ gnusound-0.7.5/doc/Makefile.in	2023-09-23 19:04:00.322976999 +0200
+@@ -24,8 +24,7 @@ docname=$(name)
+ xslstylesheet=@DB2XHTML_STYLESHEET@
+ omfdir=@datadir@/omf/$(name)
  
 -owner_user ?= root
 -owner_group ?= root
-+DESTDIR =
++DESTDIR ?=
  
  dist:
  	for lang in $(LANGUAGES); do \
-@@ -52,10 +51,10 @@
+@@ -47,18 +46,18 @@ distclean: veryclean
+ 	rm -f Makefile
+ 
+ uninstall:
+-	rm -rf $(docrootdir)
++	rm -rf $(DESTDIR)$(docrootdir)
  
  install:
+-	mkdir -p $(omfdir)
++	mkdir -p $(DESTDIR)$(omfdir)
  	for lang in $(LANGUAGES); do \
 -		mkdir -p $(docrootdir)/$$lang; \
 -		install -m 644 -o $(owner_user) -g $(owner_group) \
@@ -21,50 +27,30 @@ diff -Nurb gnusound-0.7.1.bef/doc/Makefile gnusound-0.7.1.new/doc/Makefile
 +		install -m 644 \
  			$$lang/*.xml $$lang/*.html $$lang/topic.dat \
 -			$(docrootdir)/$$lang; \
+-                install -m 644 -o $(owner_user) -g $(owner_group) \
 +			$(DESTDIR)$(docrootdir)/$$lang; \
++                install -m 644 \
+                         $$lang/$(name).omf \
+-                        $(omfdir)/$(name)-$$lang.omf; \
++                        $(DESTDIR)$(omfdir)/$(name)-$$lang.omf; \
  	done
  
  .PHONY: dist clean veryclean distclean install uninstall
-diff -Nurb gnusound-0.7.1.bef/doc/Makefile.in gnusound-0.7.1.new/doc/Makefile.in
---- gnusound-0.7.1.bef/doc/Makefile.in	2005-02-13 05:27:21.000000000 +0100
-+++ gnusound-0.7.1.new/doc/Makefile.in	2005-05-31 01:39:08.000000000 +0200
-@@ -22,8 +22,7 @@
- docname=@PACKAGE@
- xslstylesheet=@DB2XHTML_STYLESHEET@
- 
--owner_user ?= root
--owner_group ?= root
-+DESTDIR = 
- 
- dist:
- 	for lang in $(LANGUAGES); do \
-@@ -52,10 +51,10 @@
- 
- install:
- 	for lang in $(LANGUAGES); do \
--		mkdir -p $(docrootdir)/$$lang; \
--		install -m 644 -o $(owner_user) -g $(owner_group) \
-+		mkdir -p $(DESTDIR)$(docrootdir)/$$lang; \
-+		install -m 644  \
- 			$$lang/*.xml $$lang/*.html $$lang/topic.dat \
--			$(docrootdir)/$$lang; \
-+			$(DESTDIR)$(docrootdir)/$$lang; \
- 	done
- 
- .PHONY: dist clean veryclean distclean install uninstall
-diff -Nurb gnusound-0.7.1.bef/Makefile.in gnusound-0.7.1.new/Makefile.in
---- gnusound-0.7.1.bef/Makefile.in	2005-03-12 00:15:10.000000000 +0100
-+++ gnusound-0.7.1.new/Makefile.in	2005-05-31 01:38:02.000000000 +0200
-@@ -24,6 +24,8 @@
+--- gnusound-0.7.5/Makefile.in.orig	2008-07-06 10:14:12.000000000 +0200
++++ gnusound-0.7.5/Makefile.in	2023-09-23 21:04:26.860494151 +0200
+@@ -22,8 +22,10 @@ export CFLAGS=@CFLAGS@ \
+ 	-DSYSCONFDIR="${sysconfdir}" \
+ 	-DPREFIX="${prefix}" \
  	-DDATADIR="${datadir}" 
- export LDFLAGS=@LIBS@ @LDFLAGS@
+-export LDFLAGS=@LIBS@ @LDFLAGS@
++export LDFLAGS=@LDFLAGS@ @LIBS@
  
-+DESTDIR =
++DESTDIR ?=
 +
  name=@PACKAGE@
  version=@VERSION@
  prefix=@prefix@
-@@ -33,9 +35,6 @@
+@@ -33,9 +35,6 @@ bindir=@bindir@
  libdir=@libdir@/$(name)
  datadir=@datadir@
  
@@ -74,8 +60,12 @@ diff -Nurb gnusound-0.7.1.bef/Makefile.in gnusound-0.7.1.new/Makefile.in
  gnusounddir=@GNUSOUNDDIR@
  guidir=$(libdir)/gui
  docdir=$(datadir)/gnome/help/$(name)
-@@ -158,14 +157,14 @@
- 	$(CC) `cat .ldflags` $(objects) -o src/$(name)
+@@ -190,17 +189,17 @@ $(objects): %.o: %.c src/config.h src/de
+ 
+ src/$(name): $(objects) .ldflags
+ 	rm -f src/$(name)
+-	$(CC) `cat .ldflags` $(objects) -o src/$(name)
++	$(CC) $(objects) -o src/$(name) `cat .ldflags` -lm
  
  install: all 
 -	$(MAKE) -C doc install owner_user=$(owner_user) owner_group=$(owner_group)
@@ -97,7 +87,7 @@ diff -Nurb gnusound-0.7.1.bef/Makefile.in gnusound-0.7.1.new/Makefile.in
  
  uninstall:
  	$(MAKE) -C modules uninstall
-@@ -217,7 +216,7 @@
+@@ -251,7 +250,7 @@ distcheck: dist
  		cd $(name)-$(version) && \
  		./configure --prefix=`pwd`/../install CFLAGS= && \
  		make && \
@@ -106,28 +96,6 @@ diff -Nurb gnusound-0.7.1.bef/Makefile.in gnusound-0.7.1.new/Makefile.in
  
  maintainer-install: dist
  	tar xjf $(name)-$(version).tar.bz2 
-diff -Nurb gnusound-0.7.1.bef/modules/Makefile gnusound-0.7.1.new/modules/Makefile
---- gnusound-0.7.1.bef/modules/Makefile	2005-05-27 20:32:21.000000000 +0200
-+++ gnusound-0.7.1.new/modules/Makefile	2005-05-31 00:42:11.000000000 +0200
-@@ -28,9 +28,6 @@
- moduledir=$(libdir)/modules
- gnusounddir=/home/p/src/gnusound
- 
--owner_user ?= root
--owner_group ?= root
--
- src=$(shell ls *.c)
- obj=$(addsuffix .so, $(basename $(src)))
- flags=$(addprefix ., $(addsuffix .cflags, $(basename $(src))))
-@@ -61,7 +58,7 @@
- 
- install:
- 	mkdir -p $(moduledir)
--	install -m 644 -o $(owner_user) -g $(owner_group) $(module_files) $(moduledir)
-+	install -m 644 $(module_files) $(moduledir)
- 
- uninstall:
- 	(cd $(moduledir) && rm -f $(module_files))
 diff -Nurb gnusound-0.7.1.bef/modules/Makefile.in gnusound-0.7.1.new/modules/Makefile.in
 --- gnusound-0.7.1.bef/modules/Makefile.in	2005-02-13 05:27:57.000000000 +0100
 +++ gnusound-0.7.1.new/modules/Makefile.in	2005-05-31 01:40:18.000000000 +0200
@@ -137,7 +105,7 @@ diff -Nurb gnusound-0.7.1.bef/modules/Makefile.in gnusound-0.7.1.new/modules/Mak
  
 -owner_user ?= root
 -owner_group ?= root
-+DESTDIR = 
++DESTDIR ?= 
  
  src=$(shell ls *.c)
  obj=$(addsuffix .so, $(basename $(src)))
@@ -152,3 +120,5 @@ diff -Nurb gnusound-0.7.1.bef/modules/Makefile.in gnusound-0.7.1.new/modules/Mak
  
  uninstall:
  	(cd $(moduledir) && rm -f $(module_files))
+--- ../BUILD/gnusound-0.7.5/Makefile.in.orig	2023-09-23 21:05:55.943344881 +0200
++++ ../BUILD/gnusound-0.7.5/Makefile.in	2023-09-23 21:10:40.288471118 +0200
